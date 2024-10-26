@@ -1,0 +1,60 @@
+﻿@page "/Sale"
+
+@inject HttpClient Http;
+
+@using static System.Net.WebRequestMethods
+@using KXStoreSystem.Front.Models;
+@using KXStoreSystem.Front.Models.Responses
+@using KXStoreSystem.Domain.Models.Entities
+
+<h1 class="text-center mb-3">Vendas</h1>
+<a class="btn btn-primary mb-3" href="/Sale/Create">Registrar Venda</a>
+
+@if (sales == null || !sales.Any())
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Cliente</th>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Valor</th>
+                <th>Data da Venda</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sale in sales)
+            {
+                <tr>
+                    <td>@sale.Id</td>
+                    <td>@sale.CustomerId</td>
+                    <td>@sale.Customer?.Name</td>
+                    <td>@sale.ProductName</td>
+                    <td>@sale.TotalValue</td>
+                    <td>@sale.Date.ToShortDateString()</td>
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary btn-sn" href="/Sale/Edit/@sale.Id">Editar</a>
+                        <a class="btn btn-danger btn-sn" href="/Sale/Delete/@sale.Id">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<SaleResponse> sales { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        string url = "https://localhost:44344";
+
+        sales = await Http.GetFromJsonAsync<List<SaleResponse>>(url + "/api/Sale");
+    }
+}

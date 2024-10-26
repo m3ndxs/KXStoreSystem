@@ -1,0 +1,6 @@
+@KXStoreSystem_HostAddress = http://localhost:5027
+
+GET {{KXStoreSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

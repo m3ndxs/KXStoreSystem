@@ -1,0 +1,109 @@
+﻿@page "/Customer/Create"
+
+@using KXStoreSystem.Front.Models.Responses
+@using System.Text.Json.Nodes
+
+@inject HttpClient Http;
+@inject NavigationManager navManager;
+
+<div class="row">
+    <div class="col-lg-8">
+        <h1 class="mb-5">Novo Cliente</h1>
+
+        <div class="row mb-3">
+            <label class="col-md-4 col-form-label">Nome</label>
+            <div class="col-md-8">
+                <input class="form-control" @bind="customerData.Name" />
+                <span class="text-danger">@Errors["Name"]?[0]</span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-md-4 col-form-label">Email</label>
+            <div class="col-md-8">
+                <input class="form-control" type="email" @bind="customerData.Email">
+                <span class="text-danger">@Errors["Email"]?[0]</span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-md-4 col-form-label">Telefone</label>
+            <div class="col-md-8">
+                <input class="form-control" @bind="customerData.Phone">
+                <span class="text-danger">@Errors["Phone"]?[0]</span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-md-4 col-form-label">Data de Nascimento</label>
+            <div class="col-md-8">
+                <input class="form-control" type="date" @bind="customerData.DateOfBirth">
+                <span class="text-danger">@Errors["DateOfBirth"]?[0]</span>
+                <!-- Adicionando a mensagem de erro para a idade -->
+                <span class="text-danger">@ageError</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="offset-md-4 col-md-4 d-grid">
+                <button class="btn btn-primary" @onclick="SaveCustomer">Salvar</button>
+            </div>
+            <div class="col-md-4 d-grid">
+                <a class="btn btn-outline-primary" href="/Customer">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    public AddCustomerResponse customerData { get; set; } = new();
+    public JsonNode Errors { get; set; } = new JsonObject();
+    private string ageError = string.Empty; // Variável para armazenar a mensagem de erro de idade
+
+    protected override void OnInitialized()
+    {
+        customerData.DateOfBirth = DateTime.Now.Date;
+    }
+
+    protected async Task SaveCustomer()
+    {
+        // Resetar a mensagem de erro de idade
+        ageError = string.Empty;
+
+        // Verificar se o cliente tem 18 anos ou mais
+        if (!IsCustomerOldEnough(customerData.DateOfBirth))
+        {
+            ageError = "O cliente deve ter 18 anos ou mais."; // Atribuir mensagem de erro
+            return; // Cancelar a operação
+        }
+
+        var response = await Http.PostAsJsonAsync("https://localhost:44344/api/Customer", customerData);
+
+        if (response.IsSuccessStatusCode)
+        {
+            navManager.NavigateTo("/Customer");
+        }
+        else
+        {
+            var strResponse = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Json Response: \n" + strResponse);
+
+            try
+            {
+                var jsonResponse = JsonNode.Parse(strResponse);
+                Errors = jsonResponse?["errors"] ?? new JsonObject();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao processar a resposta de erro: " + ex.Message);
+            }
+        }
+    }
+
+    private bool IsCustomerOldEnough(DateTime dateOfBirth)
+    {
+        var age = DateTime.Now.Year - dateOfBirth.Year;
+        if (dateOfBirth > DateTime.Now.AddYears(-age)) age--;
+        return age >= 18;
+    }
+}

@@ -1,0 +1,12 @@
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\bin\Debug\net8.0\KXStoreSystem.Domain.deps.json
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\bin\Debug\net8.0\KXStoreSystem.Domain.dll
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\bin\Debug\net8.0\KXStoreSystem.Domain.pdb
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\KXStoreSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\KXStoreSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\KXStoreSystem.Domain.AssemblyInfo.cs
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\KXStoreSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\KXStoreSystem.Domain.sourcelink.json
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\KXStoreSystem.Domain.dll
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\refint\KXStoreSystem.Domain.dll
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\KXStoreSystem.Domain.pdb
+C:\Users\leona\OneDrive\Área de Trabalho\Programação\SistemaLojaKX\KXStoreSystem\KXStoreSystem.Domain\obj\Debug\net8.0\ref\KXStoreSystem.Domain.dll

@@ -1,0 +1,58 @@
+﻿@page "/Customer"
+@inject HttpClient Http;
+
+@using static System.Net.WebRequestMethods
+@using KXStoreSystem.Front.Models;
+@using System.Text.Json
+@using KXStoreSystem.Front.Models.Responses
+
+<h1 class="text-center mb-3">Clientes</h1>
+<a class="btn btn-primary mb-3" href="/Customer/Create">Registrar Cliente</a>
+
+@if (customers == null || !customers.Any()) 
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Data de Nascimento</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in customers)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.Phone</td>
+                    <td>@customer.DateOfBirth.ToShortDateString()</td>
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary btn-sn" href="/Customer/Edit/@customer.Id">Editar</a>
+                        <a class="btn btn-danger btn-sn" href="/Customer/Delete/@customer.Id">Excluir</a>
+                    </td>
+                </tr>    
+            }
+        </tbody>
+   </table>
+}
+
+
+@code {
+    List<CustomerResponse> customers { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        string url = "https://localhost:44344";
+
+        customers = await Http.GetFromJsonAsync<List<CustomerResponse>>(url + "/api/Customer");
+    }
+}
